@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -249,7 +250,7 @@ export default function ReportComplaintPage() {
                     />
 
                     <div>
-                      <FormLabel className="text-base block mb-2">Photo Evidence (Optional)</FormLabel>
+                      <Label className="text-base block mb-2">Photo Evidence (Optional)</Label>
                       <div className="border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-muted/50 transition-colors">
                         <div className="bg-primary/10 p-4 rounded-full text-primary mb-3">
                           <Camera className="h-6 w-6" />
