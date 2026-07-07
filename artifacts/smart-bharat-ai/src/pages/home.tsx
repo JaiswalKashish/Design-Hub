@@ -3,62 +3,202 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { IndiaFlagIcon } from "@/components/ui/IndiaFlagIcon";
-import { Bot, FileText, AlertTriangle, Search, Mic, Languages, ShieldCheck, ArrowRight, MapPin, Landmark, Star, Users, Building2 } from "lucide-react";
+import {
+  Bot, FileText, AlertTriangle, Search, ShieldCheck,
+  ArrowRight, Languages, Scale, Landmark, FlaskConical,
+  Banknote, Satellite, GraduationCap, Stethoscope, Wheat,
+  BadgeCheck, Globe2
+} from "lucide-react";
 
-// Inline SVG India map silhouette - approximate shape
-function IndiaSvgMap() {
+// Government authority icons with custom SVG buildings
+const GOV_ICONS = [
+  {
+    label: "Parliament",
+    emoji: "🏛️",
+    color: "#FF9933",
+    glow: "rgba(255,153,51,0.4)",
+    style: { top: "8%", left: "50%", transform: "translateX(-50%)" },
+    delay: 0,
+    size: "lg",
+  },
+  {
+    label: "Supreme Court",
+    emoji: "⚖️",
+    color: "#138808",
+    glow: "rgba(19,136,8,0.35)",
+    style: { top: "28%", left: "12%" },
+    delay: 0.15,
+    size: "md",
+  },
+  {
+    label: "ISRO",
+    emoji: "🚀",
+    color: "#6366f1",
+    glow: "rgba(99,102,241,0.4)",
+    style: { top: "28%", right: "10%" },
+    delay: 0.3,
+    size: "md",
+  },
+  {
+    label: "Reserve Bank",
+    emoji: "🏦",
+    color: "#f59e0b",
+    glow: "rgba(245,158,11,0.35)",
+    style: { top: "55%", left: "5%" },
+    delay: 0.45,
+    size: "sm",
+  },
+  {
+    label: "IIT / Education",
+    emoji: "🎓",
+    color: "#3b82f6",
+    glow: "rgba(59,130,246,0.35)",
+    style: { top: "55%", right: "5%" },
+    delay: 0.6,
+    size: "sm",
+  },
+  {
+    label: "Health Ministry",
+    emoji: "🏥",
+    color: "#ef4444",
+    glow: "rgba(239,68,68,0.35)",
+    style: { top: "78%", left: "18%" },
+    delay: 0.75,
+    size: "sm",
+  },
+  {
+    label: "Agriculture",
+    emoji: "🌾",
+    color: "#10b981",
+    glow: "rgba(16,185,129,0.35)",
+    style: { top: "78%", right: "18%" },
+    delay: 0.9,
+    size: "sm",
+  },
+];
+
+function GovIcon({ item }: { item: typeof GOV_ICONS[0] }) {
+  const sizeMap = { lg: 72, md: 56, sm: 44 };
+  const fontSize = { lg: "2rem", md: "1.6rem", sm: "1.3rem" };
+  const sz = sizeMap[item.size as keyof typeof sizeMap];
+  const fs = fontSize[item.size as keyof typeof fontSize];
+
   return (
-    <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full max-h-[420px] opacity-25">
-      <path
-        d="M196 12 L215 10 L240 18 L260 14 L280 22 L295 30 L305 45 L310 60 L318 70 L322 85 L330 95 L338 105 L345 118 L350 132 L352 148 L348 162 L342 175 L338 190 L340 205 L345 218 L348 232 L344 245 L340 258 L332 270 L320 280 L310 292 L305 308 L298 322 L290 335 L280 348 L268 360 L258 372 L248 385 L240 398 L235 412 L232 426 L230 440 L228 454 L225 465 L222 476 L220 488 L218 500 L215 488 L212 476 L210 462 L208 448 L205 432 L200 416 L194 400 L185 386 L174 374 L162 362 L150 350 L140 338 L130 325 L122 312 L116 298 L110 284 L108 270 L106 256 L102 242 L95 228 L88 215 L82 200 L78 185 L75 170 L74 155 L76 140 L82 126 L90 112 L96 98 L98 83 L100 68 L106 54 L115 42 L128 32 L142 22 L158 15 L176 12 L196 12 Z"
-        stroke="url(#indiaGrad)"
-        strokeWidth="3"
-        fill="url(#indiaFill)"
-        strokeLinejoin="round"
-      />
-      {/* Kashmir region */}
-      <path
-        d="M196 12 L180 8 L165 12 L152 20 L140 28 L128 32 L120 40 L115 52 L112 64 L108 72 L100 62 L90 55 L82 48 L78 40 L88 32 L100 26 L115 18 L130 12 L148 8 L166 4 L185 2 L205 4 L220 8 L240 14"
-        stroke="url(#indiaGrad)"
-        strokeWidth="2.5"
-        fill="url(#indiaFill)"
-        strokeLinejoin="round"
-      />
-      {/* Northeast region */}
-      <path
-        d="M340 105 L350 100 L358 108 L362 120 L368 132 L372 145 L370 158 L362 165 L352 162 L345 155 L342 145 L345 132 L340 120 L338 105"
-        stroke="url(#indiaGrad)"
-        strokeWidth="2.5"
-        fill="url(#indiaFill)"
-        strokeLinejoin="round"
-      />
-      {/* Andaman hint */}
-      <circle cx="375" cy="310" r="6" fill="url(#indiaGrad)" opacity="0.8" />
-      <circle cx="378" cy="328" r="4" fill="url(#indiaGrad)" opacity="0.6" />
-      <circle cx="372" cy="345" r="4" fill="url(#indiaGrad)" opacity="0.5" />
-      <defs>
-        <linearGradient id="indiaGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#FF9933" />
-          <stop offset="50%" stopColor="#FFFFFF" stopOpacity="0.7" />
-          <stop offset="100%" stopColor="#138808" />
-        </linearGradient>
-        <linearGradient id="indiaFill" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#FF9933" stopOpacity="0.08" />
-          <stop offset="100%" stopColor="#138808" stopOpacity="0.05" />
-        </linearGradient>
-      </defs>
-    </svg>
+    <motion.div
+      className="absolute flex flex-col items-center gap-1.5 select-none"
+      style={item.style as React.CSSProperties}
+      initial={{ opacity: 0, scale: 0, y: -20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.5 + item.delay, type: "spring", stiffness: 180, damping: 14 }}
+    >
+      <motion.div
+        animate={{ y: [0, -6, 0] }}
+        transition={{ duration: 3 + item.delay, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          width: sz,
+          height: sz,
+          borderRadius: "50%",
+          background: `radial-gradient(circle at 35% 35%, ${item.color}22, ${item.color}08)`,
+          border: `2px solid ${item.color}55`,
+          boxShadow: `0 0 20px ${item.glow}, 0 4px 16px rgba(0,0,0,0.3)`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: fs,
+          backdropFilter: "blur(8px)",
+          cursor: "default",
+        }}
+      >
+        {item.emoji}
+      </motion.div>
+      <motion.span
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 + item.delay }}
+        style={{
+          fontSize: "9px",
+          fontWeight: 700,
+          color: "rgba(255,255,255,0.75)",
+          background: "rgba(0,0,0,0.45)",
+          borderRadius: "6px",
+          padding: "2px 6px",
+          whiteSpace: "nowrap",
+          backdropFilter: "blur(6px)",
+          border: "1px solid rgba(255,255,255,0.1)",
+          letterSpacing: "0.04em",
+          textTransform: "uppercase",
+        }}
+      >
+        {item.label}
+      </motion.span>
+    </motion.div>
   );
 }
 
-const MAP_ICONS = [
-  { icon: MapPin, className: "text-orange-500", style: { top: "22%", left: "38%" }, label: "Delhi", delay: 0 },
-  { icon: Landmark, className: "text-primary", style: { top: "42%", left: "52%" }, label: "Mumbai", delay: 0.15 },
-  { icon: ShieldCheck, className: "text-blue-500", style: { top: "60%", left: "30%" }, label: "Chennai", delay: 0.3 },
-  { icon: Star, className: "text-yellow-500", style: { top: "30%", left: "65%" }, label: "Kolkata", delay: 0.45 },
-  { icon: Building2, className: "text-green-600", style: { top: "55%", left: "48%" }, label: "Hyderabad", delay: 0.6 },
-  { icon: Users, className: "text-purple-500", style: { top: "18%", left: "28%" }, label: "Chandigarh", delay: 0.75 },
-];
+// Subtle Ashoka Chakra spinning in the center
+function AshokaChakra() {
+  return (
+    <motion.div
+      className="absolute inset-0 flex items-center justify-center pointer-events-none"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.3, duration: 1 }}
+    >
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+        style={{
+          width: 180,
+          height: 180,
+          borderRadius: "50%",
+          border: "2px solid rgba(19,136,8,0.18)",
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {/* 24 spokes */}
+        {Array.from({ length: 24 }).map((_, i) => (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              width: "2px",
+              height: "80px",
+              background: "linear-gradient(to bottom, rgba(19,136,8,0.5), transparent)",
+              transformOrigin: "bottom center",
+              bottom: "50%",
+              left: "calc(50% - 1px)",
+              transform: `rotate(${i * 15}deg)`,
+            }}
+          />
+        ))}
+        <div
+          style={{
+            width: 16,
+            height: 16,
+            borderRadius: "50%",
+            background: "rgba(19,136,8,0.4)",
+            border: "2px solid rgba(19,136,8,0.6)",
+          }}
+        />
+      </motion.div>
+
+      {/* Outer glow ring */}
+      <div
+        className="absolute"
+        style={{
+          width: 220,
+          height: 220,
+          borderRadius: "50%",
+          border: "1px solid rgba(255,153,51,0.12)",
+          boxShadow: "0 0 60px rgba(255,153,51,0.08) inset",
+        }}
+      />
+    </motion.div>
+  );
+}
 
 export default function HomePage() {
   return (
@@ -72,34 +212,27 @@ export default function HomePage() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/20 blur-[120px] rounded-full pointer-events-none" />
 
           <div className="container relative z-10 mx-auto px-4 text-center">
-            {/* India map with popping location icons */}
-            <div className="relative mx-auto max-w-sm mb-4" style={{ height: "280px" }}>
-              {/* Map silhouette */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <IndiaSvgMap />
-              </div>
 
-              {/* Popping city icons over the map */}
-              {MAP_ICONS.map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute flex flex-col items-center gap-1"
-                  style={item.style}
-                  initial={{ opacity: 0, scale: 0, y: -10 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.8 + item.delay, type: "spring", stiffness: 200 }}
-                >
-                  <motion.div
-                    animate={{ y: [0, -4, 0] }}
-                    transition={{ duration: 2.5, repeat: Infinity, delay: item.delay }}
-                    className={`p-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg ${item.className}`}
-                  >
-                    <item.icon className="h-4 w-4" />
-                  </motion.div>
-                  <span className="text-[9px] font-semibold text-white/70 bg-black/30 rounded px-1 py-0.5 backdrop-blur-sm whitespace-nowrap">
-                    {item.label}
-                  </span>
-                </motion.div>
+            {/* Government Authority Icons Ring */}
+            <div
+              className="relative mx-auto mb-6"
+              style={{ width: "340px", height: "340px" }}
+            >
+              <AshokaChakra />
+
+              {/* India text watermark in center */}
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+              >
+                <IndiaFlagIcon className="w-16 h-12 drop-shadow-lg" />
+              </motion.div>
+
+              {/* Government authority icons around the ring */}
+              {GOV_ICONS.map((item, i) => (
+                <GovIcon key={i} item={item} />
               ))}
             </div>
 
