@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "/api/index.js"
+      "destination": "https://design-hub-x54p.onrender.com/api/:path*"
     },
     {
       "source": "/((?!api/).*)",
