@@ -211,74 +211,101 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/20 blur-[120px] rounded-full pointer-events-none" />
 
-          <div className="container relative z-10 mx-auto px-4 text-center">
+          <div className="container relative z-10 mx-auto px-4">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-12 min-h-[540px]">
 
-            {/* Government Authority Icons Ring */}
-            <div
-              className="relative mx-auto mb-6"
-              style={{ width: "340px", height: "340px" }}
-            >
-              <AshokaChakra />
+              {/* LEFT — Text & CTA */}
+              <div className="flex-1 flex flex-col items-start text-left max-w-xl">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="mb-6 inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-medium text-primary backdrop-blur-sm"
+                >
+                  <span className="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse" />
+                  Revolutionizing Indian Governance
+                </motion.div>
 
-              {/* India text watermark in center */}
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 text-gradient-saffron bg-clip-text text-transparent leading-tight"
+                >
+                  Smart<br />Bharat AI
+                </motion.h1>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed"
+                >
+                  Your personal AI civic companion. Discover schemes, track complaints, and navigate government services effortlessly in <span className="text-primary font-semibold">10+ languages</span>.
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="flex flex-col sm:flex-row items-start gap-4"
+                >
+                  <Link href="/login" className="inline-flex h-13 items-center justify-center rounded-xl bg-primary px-8 py-3.5 text-base font-semibold text-primary-foreground shadow-lg hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all gap-2">
+                    Get Started <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link href="/login" className="inline-flex h-13 items-center justify-center rounded-xl border border-input bg-background/50 backdrop-blur-sm px-8 py-3.5 text-base font-medium shadow-sm hover:bg-accent hover:text-accent-foreground hover:scale-105 active:scale-95 transition-all gap-2">
+                    <Bot className="h-5 w-5" /> Talk to AI
+                  </Link>
+                </motion.div>
+
+                {/* Trust badges */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.8, duration: 0.6 }}
+                  className="mt-10 flex items-center gap-6 text-sm text-muted-foreground"
+                >
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-green-500">✓</span> 500+ Services
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-green-500">✓</span> 10+ Languages
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-green-500">✓</span> AI Powered
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* RIGHT — Government Icons Ring */}
+              <div
+                className="flex-shrink-0 relative"
+                style={{ width: "380px", height: "380px" }}
               >
-                <IndiaFlagIcon className="w-16 h-12 drop-shadow-lg" />
-              </motion.div>
+                <AshokaChakra />
 
-              {/* Government authority icons around the ring */}
-              {GOV_ICONS.map((item, i) => (
-                <GovIcon key={i} item={item} />
-              ))}
-            </div>
+                {/* Indian flag in center */}
+                <motion.div
+                  className="absolute inset-0 flex items-center justify-center"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.4, duration: 0.6 }}
+                >
+                  <div className="p-4 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm shadow-2xl">
+                    <IndiaFlagIcon className="w-16 h-12 drop-shadow-lg" />
+                  </div>
+                </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mb-6 inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-medium text-primary backdrop-blur-sm"
-            >
-              <span className="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse" />
-              Revolutionizing Indian Governance
-            </motion.div>
+                {/* Government authority icons */}
+                {GOV_ICONS.map((item, i) => (
+                  <GovIcon key={i} item={item} />
+                ))}
+              </div>
 
-            <div className="mx-auto max-w-2xl glass p-8 rounded-xl backdrop-blur-sm">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-gradient-saffron bg-clip-text text-transparent"
-              >
-                Smart Bharat AI
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="mx-auto max-w-2xl text-xl text-muted-foreground mb-8"
-              >
-                Your personal AI civic companion. Discover schemes, track complaints, and navigate government services effortlessly in 10+ languages.
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="flex flex-col sm:flex-row items-center justify-center gap-4"
-              >
-                <Link href="/login" className="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-8 text-base font-medium text-primary-foreground shadow-lg hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all w-full sm:w-auto">
-                  Get Started <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-                <Link href="/login" className="inline-flex h-12 items-center justify-center rounded-lg border border-input bg-background/50 backdrop-blur-sm px-8 text-base font-medium shadow-sm hover:bg-accent hover:text-accent-foreground hover:scale-105 active:scale-95 transition-all w-full sm:w-auto">
-                  <Bot className="mr-2 h-5 w-5" /> Talk to AI
-                </Link>
-              </motion.div>
             </div>
           </div>
         </section>
+
 
         {/* Features Section */}
         <section className="py-24 bg-muted/30">
