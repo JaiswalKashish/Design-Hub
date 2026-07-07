@@ -1,22 +1,33 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Smart Bharat AI API specification
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: chat
+    description: AI Civic Companion chat
+  - name: complaints
+    description: Complaint reporting and tracking
+  - name: schemes
+    description: Government scheme finder
+  - name: documents
+    description: Document assistant
+  - name: profile
+    description: User profile
+  - name: admin
+    description: Admin dashboard
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +35,311 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /chat/message:
+    post:
+      operationId: sendChatMessage
+      tags: [chat]
+      summary: Send a message to AI and get a response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatMessageInput"
+      responses:
+        "200":
+          description: AI response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatResponse"
+
+  /chat/sessions:
+    get:
+      operationId: listChatSessions
+      tags: [chat]
+      summary: List all chat sessions for a user
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of chat sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChatSession"
+    post:
+      operationId: createChatSession
+      tags: [chat]
+      summary: Create a new chat session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatSessionInput"
+      responses:
+        "201":
+          description: Created session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatSession"
+
+  /chat/sessions/{sessionId}/messages:
+    get:
+      operationId: getChatMessages
+      tags: [chat]
+      summary: Get messages for a chat session
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChatMessage"
+
+  /complaints:
+    get:
+      operationId: listComplaints
+      tags: [complaints]
+      summary: List complaints for a user
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of complaints
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Complaint"
+    post:
+      operationId: createComplaint
+      tags: [complaints]
+      summary: Submit a new complaint
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ComplaintInput"
+      responses:
+        "201":
+          description: Complaint created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Complaint"
+
+  /complaints/{complaintId}:
+    get:
+      operationId: getComplaint
+      tags: [complaints]
+      summary: Get a complaint by ID
+      parameters:
+        - name: complaintId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Complaint details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Complaint"
+        "404":
+          description: Complaint not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    patch:
+      operationId: updateComplaintStatus
+      tags: [complaints]
+      summary: Update complaint status (admin)
+      parameters:
+        - name: complaintId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ComplaintStatusUpdate"
+      responses:
+        "200":
+          description: Updated complaint
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Complaint"
+
+  /complaints/analyze:
+    post:
+      operationId: analyzeComplaint
+      tags: [complaints]
+      summary: Analyze a complaint description using AI
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ComplaintAnalysisInput"
+      responses:
+        "200":
+          description: AI analysis result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ComplaintAnalysis"
+
+  /schemes/find:
+    post:
+      operationId: findSchemes
+      tags: [schemes]
+      summary: Find eligible government schemes based on profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SchemeSearchInput"
+      responses:
+        "200":
+          description: List of matching schemes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Scheme"
+
+  /schemes/saved:
+    get:
+      operationId: getSavedSchemes
+      tags: [schemes]
+      summary: Get saved schemes for a user
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Saved schemes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Scheme"
+
+  /documents/info:
+    post:
+      operationId: getDocumentInfo
+      tags: [documents]
+      summary: Get detailed information for a document type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentInfoInput"
+      responses:
+        "200":
+          description: Document information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DocumentInfo"
+
+  /profile/{userId}:
+    get:
+      operationId: getUserProfile
+      tags: [profile]
+      summary: Get user profile
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserProfile"
+    patch:
+      operationId: updateUserProfile
+      tags: [profile]
+      summary: Update user profile
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserProfileUpdate"
+      responses:
+        "200":
+          description: Updated profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserProfile"
+
+  /admin/stats:
+    get:
+      operationId: getAdminStats
+      tags: [admin]
+      summary: Get admin dashboard statistics
+      responses:
+        "200":
+          description: Dashboard stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminStats"
+
 components:
   schemas:
     HealthStatus:
@@ -31,6 +347,322 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required: [error]
+
+    ChatMessageInput:
+      type: object
+      required: [message, sessionId, userId]
+      properties:
+        message:
+          type: string
+        sessionId:
+          type: string
+        userId:
+          type: string
+        language:
+          type: string
+
+    ChatResponse:
+      type: object
+      required: [reply, sessionId]
+      properties:
+        reply:
+          type: string
+        sessionId:
+          type: string
+
+    ChatSession:
+      type: object
+      required: [id, userId, title, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        title:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        messageCount:
+          type: integer
+
+    ChatSessionInput:
+      type: object
+      required: [userId, title]
+      properties:
+        userId:
+          type: string
+        title:
+          type: string
+
+    ChatMessage:
+      type: object
+      required: [id, sessionId, role, content, createdAt]
+      properties:
+        id:
+          type: string
+        sessionId:
+          type: string
+        role:
+          type: string
+          enum: [user, assistant]
+        content:
+          type: string
+        createdAt:
+          type: string
+
+    Complaint:
+      type: object
+      required: [id, complaintId, userId, category, description, status, createdAt]
+      properties:
+        id:
+          type: string
+        complaintId:
+          type: string
+        userId:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum: [pending, assigned, in_progress, resolved]
+        location:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        department:
+          type: ["string", "null"]
+        priority:
+          type: ["string", "null"]
+        severity:
+          type: ["string", "null"]
+        officerName:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        timeline:
+          type: array
+          items:
+            $ref: "#/components/schemas/TimelineEvent"
+
+    TimelineEvent:
+      type: object
+      required: [status, timestamp]
+      properties:
+        status:
+          type: string
+        timestamp:
+          type: string
+        note:
+          type: ["string", "null"]
+
+    ComplaintInput:
+      type: object
+      required: [userId, category, description]
+      properties:
+        userId:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        location:
+          type: string
+        imageUrl:
+          type: string
+        department:
+          type: string
+        priority:
+          type: string
+        severity:
+          type: string
+
+    ComplaintStatusUpdate:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [pending, assigned, in_progress, resolved]
+        officerName:
+          type: string
+        note:
+          type: string
+
+    ComplaintAnalysisInput:
+      type: object
+      required: [description, category]
+      properties:
+        description:
+          type: string
+        category:
+          type: string
+        imageBase64:
+          type: string
+
+    ComplaintAnalysis:
+      type: object
+      required: [issue, department, priority, severity, suggestedDescription]
+      properties:
+        issue:
+          type: string
+        department:
+          type: string
+        priority:
+          type: string
+        severity:
+          type: string
+        suggestedDescription:
+          type: string
+
+    SchemeSearchInput:
+      type: object
+      required: [age, gender, occupation, income, state, category]
+      properties:
+        age:
+          type: integer
+        gender:
+          type: string
+        occupation:
+          type: string
+        income:
+          type: string
+        state:
+          type: string
+        category:
+          type: string
+
+    Scheme:
+      type: object
+      required: [id, name, description, eligibility, benefits, documents, applicationProcess, officialPortal]
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        eligibility:
+          type: string
+        benefits:
+          type: string
+        documents:
+          type: array
+          items:
+            type: string
+        applicationProcess:
+          type: string
+        officialPortal:
+          type: string
+        category:
+          type: string
+
+    DocumentInfoInput:
+      type: object
+      required: [documentType]
+      properties:
+        documentType:
+          type: string
+
+    DocumentInfo:
+      type: object
+      required: [documentType, requiredDocuments, fees, processingTime, offlineOffice, onlinePortal, importantNotes]
+      properties:
+        documentType:
+          type: string
+        requiredDocuments:
+          type: array
+          items:
+            type: string
+        fees:
+          type: string
+        processingTime:
+          type: string
+        offlineOffice:
+          type: string
+        onlinePortal:
+          type: string
+        importantNotes:
+          type: array
+          items:
+            type: string
+
+    UserProfile:
+      type: object
+      required: [userId, name, email]
+      properties:
+        userId:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        photoUrl:
+          type: ["string", "null"]
+        language:
+          type: string
+        state:
+          type: ["string", "null"]
+        darkMode:
+          type: boolean
+        notifications:
+          type: boolean
+
+    UserProfileUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        language:
+          type: string
+        state:
+          type: string
+        darkMode:
+          type: boolean
+        notifications:
+          type: boolean
+
+    AdminStats:
+      type: object
+      required: [totalComplaints, resolvedComplaints, pendingComplaints, assignedComplaints, inProgressComplaints, categoryBreakdown, recentComplaints]
+      properties:
+        totalComplaints:
+          type: integer
+        resolvedComplaints:
+          type: integer
+        pendingComplaints:
+          type: integer
+        assignedComplaints:
+          type: integer
+        inProgressComplaints:
+          type: integer
+        categoryBreakdown:
+          type: array
+          items:
+            $ref: "#/components/schemas/CategoryCount"
+        recentComplaints:
+          type: array
+          items:
+            $ref: "#/components/schemas/Complaint"
+
+    CategoryCount:
+      type: object
+      required: [category, count]
+      properties:
+        category:
+          type: string
+        count:
+          type: integer

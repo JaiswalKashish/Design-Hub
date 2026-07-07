@@ -1,0 +1,624 @@
+You are an expert Full Stack Developer, UI/UX Designer, and AI Engineer.
+
+Build a complete production-quality web application called
+
+🇮🇳 Smart Bharat AI
+"Your Personal AI Civic Companion"
+
+The project is for the DEVENGERS PromptWars 2026 Hackathon.
+
+The objective is to build a Generative AI powered platform that simplifies access to Indian government services, enables complaint reporting, provides personalized recommendations, and offers multilingual AI assistance.
+
+The project should look like a modern SaaS product with excellent UI/UX.
+
+---------------------------------
+TECH STACK
+---------------------------------
+
+Frontend
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router
+- Framer Motion
+- Lucide React Icons
+
+Backend
+- Node.js
+- Express
+
+Database
+- Firebase Firestore
+
+Authentication
+- Firebase Authentication (Google + Email)
+
+AI
+- Google Gemini API
+
+Maps
+- React Leaflet
+- OpenStreetMap
+
+Deployment
+- Vercel
+
+---------------------------------
+UI DESIGN
+---------------------------------
+
+Modern Government + AI Theme
+
+Colors
+
+Primary
+#2563EB
+
+Secondary
+#0F172A
+
+Accent
+#22C55E
+
+Background
+White
+
+Cards
+Glassmorphism
+
+Rounded Corners
+
+Smooth Animations
+
+Responsive on
+
+Desktop
+
+Tablet
+
+Mobile
+
+Use Framer Motion animations throughout.
+
+Use beautiful gradients.
+
+Professional typography.
+
+Do not make it look like a college project.
+
+---------------------------------
+LANDING PAGE
+---------------------------------
+
+Navigation
+
+Logo
+
+Home
+
+Features
+
+About
+
+Contact
+
+Get Started Button
+
+Hero Section
+
+Heading
+
+Smart Bharat AI
+
+Subtitle
+
+Your Personal AI Civic Companion
+
+Description
+
+Simplifying Government Services using Artificial Intelligence.
+
+Buttons
+
+Get Started
+
+Talk to AI
+
+Animated illustration of AI + India map.
+
+Feature Section
+
+Cards
+
+AI Civic Companion
+
+Scheme Finder
+
+Document Assistant
+
+Complaint Reporting
+
+Complaint Tracking
+
+Voice Assistant
+
+Multilingual Support
+
+Statistics Section
+
+Government Services
+
+Languages Supported
+
+Complaints Managed
+
+Footer
+
+---------------------------------
+LOGIN PAGE
+---------------------------------
+
+Google Login
+
+Email Login
+
+Beautiful modern card.
+
+---------------------------------
+DASHBOARD
+---------------------------------
+
+Greeting
+
+Search Bar
+
+Quick Action Cards
+
+AI Chat
+
+Find Government Schemes
+
+Document Assistant
+
+Report Complaint
+
+Track Complaint
+
+Nearby Offices
+
+Emergency Help
+
+Recent Activities
+
+Notifications
+
+---------------------------------
+PAGE 1
+
+AI CIVIC COMPANION
+---------------------------------
+
+Build a ChatGPT-style interface.
+
+Features
+
+Chat history
+
+Typing animation
+
+Markdown support
+
+Suggested prompts
+
+Example prompts
+
+How to apply for Passport?
+
+How to get Birth Certificate?
+
+How to renew Aadhaar?
+
+How to register voter ID?
+
+Prompt Gemini with
+
+"You are Smart Bharat AI.
+
+You help Indian citizens understand government services.
+
+Always explain in simple language.
+
+Mention required documents.
+
+Mention fees if applicable.
+
+Mention processing time.
+
+Mention official portal.
+
+Keep answers under 250 words.
+
+Respond in the same language as the user's question."
+
+---------------------------------
+PAGE 2
+
+SCHEME FINDER
+---------------------------------
+
+Beautiful form
+
+Fields
+
+Age
+
+Gender
+
+Occupation
+
+Income
+
+State
+
+Category
+
+Button
+
+Find My Schemes
+
+Gemini should recommend
+
+Eligible Schemes
+
+Benefits
+
+Eligibility
+
+Required Documents
+
+Application Process
+
+Official Portal
+
+Display beautiful cards.
+
+---------------------------------
+PAGE 3
+
+DOCUMENT ASSISTANT
+---------------------------------
+
+Dropdown
+
+Passport
+
+PAN Card
+
+Driving License
+
+Birth Certificate
+
+Death Certificate
+
+Income Certificate
+
+Marriage Certificate
+
+Aadhaar
+
+Ration Card
+
+Gemini returns
+
+Required Documents
+
+Government Fees
+
+Processing Time
+
+Where to Apply
+
+Offline Office
+
+Online Portal
+
+Important Notes
+
+---------------------------------
+PAGE 4
+
+REPORT COMPLAINT
+---------------------------------
+
+Modern complaint form
+
+Upload Image
+
+Category
+
+Road
+
+Garbage
+
+Electricity
+
+Street Light
+
+Drainage
+
+Water Leakage
+
+Public Transport
+
+Location Picker
+
+Description
+
+AI analyzes uploaded image using Gemini Vision.
+
+Gemini identifies
+
+Issue
+
+Department
+
+Priority
+
+Severity
+
+Generates complaint automatically.
+
+User clicks Submit.
+
+Store complaint in Firebase.
+
+Generate Complaint ID
+
+SB-XXXXXXXX
+
+---------------------------------
+PAGE 5
+
+TRACK COMPLAINT
+---------------------------------
+
+Search using Complaint ID.
+
+Display
+
+Status
+
+Pending
+
+Assigned
+
+In Progress
+
+Resolved
+
+Timeline
+
+Officer Assigned
+
+Department
+
+---------------------------------
+PAGE 6
+
+NEARBY GOVERNMENT OFFICES
+---------------------------------
+
+Display OpenStreetMap.
+
+Show nearby
+
+Police Station
+
+Hospitals
+
+Passport Office
+
+Municipality
+
+Post Office
+
+Electricity Office
+
+Water Department
+
+---------------------------------
+PAGE 7
+
+EMERGENCY SERVICES
+---------------------------------
+
+Cards
+
+Police
+
+Fire
+
+Ambulance
+
+Women Helpline
+
+Child Helpline
+
+Disaster Management
+
+Display emergency numbers.
+
+---------------------------------
+PAGE 8
+
+PROFILE
+---------------------------------
+
+Photo
+
+Name
+
+Language
+
+State
+
+Saved Chats
+
+Saved Schemes
+
+Complaint History
+
+Settings
+
+Dark Mode
+
+Language
+
+Notifications
+
+Logout
+
+---------------------------------
+ADMIN DASHBOARD
+---------------------------------
+
+Display
+
+Total Complaints
+
+Resolved
+
+Pending
+
+Pie Chart
+
+Complaint Categories
+
+Recent Complaints
+
+Update Complaint Status
+
+---------------------------------
+VOICE FEATURES
+---------------------------------
+
+Use Web Speech API.
+
+Voice Input
+
+Text to Speech
+
+AI responds in spoken form.
+
+---------------------------------
+MULTILINGUAL
+---------------------------------
+
+Support
+
+English
+
+Hindi
+
+Tamil
+
+Telugu
+
+Kannada
+
+Malayalam
+
+Bengali
+
+Punjabi
+
+Gemini should automatically reply in the user's language.
+
+---------------------------------
+AI FEATURES
+---------------------------------
+
+AI Government Chat
+
+AI Scheme Recommendation
+
+AI Document Assistant
+
+AI Complaint Generator
+
+AI Translation
+
+AI Voice Assistant
+
+---------------------------------
+BONUS FEATURES
+---------------------------------
+
+Government News
+
+Save AI Chats
+
+Download Complaint as PDF
+
+Dark Mode
+
+Notifications
+
+Responsive Design
+
+Loading Skeletons
+
+Error Handling
+
+Toast Notifications
+
+---------------------------------
+FOLDER STRUCTURE
+---------------------------------
+
+Generate a professional folder structure.
+
+Separate
+
+components
+
+pages
+
+hooks
+
+services
+
+utils
+
+context
+
+firebase
+
+types
+
+assets
+
+---------------------------------
+CODE QUALITY
+---------------------------------
+
+Use reusable components.
+
+TypeScript interfaces.
+
+Clean architecture.
+
+No repeated code.
+
+Responsive everywhere.
+
+Production-ready code.
+
+---------------------------------
+OUTPUT
+---------------------------------
+
+Generate the complete project with all pages, routing, reusable components, Firebase integration, Gemini API integration, Tailwind styling, and deployment-ready configuration.
+
+The final result should look like a polished government AI platform comparable to modern SaaS products, with smooth animations, excellent UX, and a professional finish suitable for winning a hackathon.
