@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
 import { Mail, Lock, LogIn, ArrowRight } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
+import { IndiaFlagIcon } from "@/components/ui/IndiaFlagIcon";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -32,7 +33,7 @@ export default function LoginPage() {
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent/20 rounded-full blur-[100px]" />
 
       <Link href="/" className="mb-8 flex items-center gap-2 group relative z-10">
-        <span className="text-3xl transition-transform group-hover:scale-110">🇮🇳</span>
+        <IndiaFlagIcon className="w-9 h-7 transition-transform group-hover:scale-110" />
         <span className="text-2xl font-bold tracking-tight">Smart Bharat AI</span>
       </Link>
 

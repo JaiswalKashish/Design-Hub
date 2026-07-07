@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Phone, ShieldAlert, Flame, Ambulance, Users, Baby, AlertTriangle } from "lucide-react";
 import { motion } from "framer-motion";
+import { IndiaFlagIcon } from "@/components/ui/IndiaFlagIcon";
 
 const EMERGENCIES = [
   { id: "police", name: "Police", number: "100", icon: ShieldAlert, color: "blue" },
@@ -55,7 +56,7 @@ export default function EmergencyPage() {
 
       <div className="flex flex-col items-center justify-center text-center space-y-2 mb-10">
         <div className="inline-flex items-center justify-center bg-background border px-4 py-1.5 rounded-full mb-2 shadow-sm">
-          <span className="text-lg mr-2">🇮🇳</span>
+          <IndiaFlagIcon className="w-5 h-4 mr-2" />
           <span className="font-bold text-sm tracking-widest uppercase text-muted-foreground">National Helplines</span>
         </div>
         <h1 className="text-4xl md:text-5xl font-black tracking-tight">Help is one tap away.</h1>

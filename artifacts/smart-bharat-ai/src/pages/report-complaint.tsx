@@ -134,9 +134,9 @@ export default function ReportComplaintPage() {
 
       {/* Progress Stepper */}
       <div className="relative">
-        <div className="absolute top-1/2 left-0 w-full h-1 bg-muted -translate-y-1/2 rounded-full overflow-hidden">
+        <div className="absolute top-1/2 left-0 w-full h-1 bg-border/60 -translate-y-1/2 rounded-full overflow-hidden">
           <div 
-            className="h-full bg-primary transition-all duration-500 ease-in-out" 
+            className="h-full bg-gradient-to-r from-[#FF9933] via-yellow-400 to-[#138808] transition-all duration-500 ease-in-out" 
             style={{ width: `${((step - 1) / 2) * 100}%` }} 
           />
         </div>
@@ -144,15 +144,17 @@ export default function ReportComplaintPage() {
           {[1, 2, 3].map((i) => (
             <div 
               key={i} 
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-colors duration-300 border-4 border-background ${
-                step >= i ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
+              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 border-4 border-background shadow-sm ${
+                step >= i 
+                  ? i === 1 ? 'bg-[#FF9933] text-white' : i === 2 ? 'bg-yellow-500 text-white' : 'bg-[#138808] text-white'
+                  : 'bg-muted text-muted-foreground'
               }`}
             >
               {step > i ? <CheckCircle2 className="h-5 w-5" /> : i}
             </div>
           ))}
         </div>
-        <div className="flex justify-between mt-2 text-xs font-medium text-muted-foreground px-2">
+        <div className="flex justify-between mt-2 text-xs font-semibold text-muted-foreground px-2">
           <span>Category</span>
           <span>Details</span>
           <span>AI Analysis</span>
@@ -161,7 +163,7 @@ export default function ReportComplaintPage() {
 
       <Form {...form}>
         <form className="space-y-6">
-          <Card className="border-border/60 shadow-md">
+          <Card className="border-border/50 bg-card/60 backdrop-blur-md overflow-hidden shadow-lg">
             <CardContent className="p-6 md:p-8">
               <AnimatePresence mode="wait">
                 {step === 1 && (
@@ -173,22 +175,25 @@ export default function ReportComplaintPage() {
                     className="space-y-6"
                   >
                     <div>
-                      <h3 className="text-xl font-semibold mb-4">What's the issue?</h3>
+                      <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                        <span className="h-4 w-1 bg-primary rounded-full" />
+                        What's the issue?
+                      </h3>
                       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         {CATEGORIES.map((cat) => (
                           <div 
                             key={cat.id}
                             onClick={() => form.setValue("category", cat.id, { shouldValidate: true })}
-                            className={`cursor-pointer rounded-xl border p-4 flex flex-col items-center text-center gap-3 transition-all ${
+                            className={`cursor-pointer rounded-xl border p-4 flex flex-col items-center text-center gap-3 transition-all duration-300 card-hover bg-card/40 ${
                               categoryValue === cat.id 
-                                ? 'border-primary bg-primary/10 shadow-sm ring-1 ring-primary ring-offset-1' 
-                                : 'hover:border-primary/50 hover:bg-muted/50'
+                                ? 'border-[#FF9933] bg-[#FF9933]/10 shadow-md ring-1 ring-[#FF9933] ring-offset-1 glow-saffron' 
+                                : 'hover:border-[#FF9933]/30 hover:bg-muted/30'
                             }`}
                           >
-                            <div className={`p-3 rounded-full ${categoryValue === cat.id ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground'}`}>
+                            <div className={`p-3 rounded-full border transition-all duration-300 ${categoryValue === cat.id ? 'bg-[#FF9933] text-white border-transparent' : 'bg-muted text-foreground border-border'}`}>
                               <cat.icon className="h-6 w-6" />
                             </div>
-                            <span className="text-sm font-medium">{cat.label}</span>
+                            <span className="text-sm font-semibold">{cat.label}</span>
                           </div>
                         ))}
                       </div>

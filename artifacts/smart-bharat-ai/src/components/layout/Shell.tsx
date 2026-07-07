@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@/contexts/AuthContext";
 import { ThemeToggle } from "../theme-toggle";
@@ -17,8 +17,8 @@ import {
   Menu,
   X
 } from "lucide-react";
-import { useState } from "react";
 import { Button } from "../ui/button";
+import { IndiaFlagIcon } from "../ui/IndiaFlagIcon";
 
 interface ShellProps {
   children: ReactNode;
@@ -51,9 +51,9 @@ export function Shell({ children }: ShellProps) {
     <div className="flex h-screen overflow-hidden bg-background">
       {/* Desktop Sidebar */}
       <aside className="hidden w-64 flex-col bg-sidebar text-sidebar-foreground md:flex">
-        <div className="flex h-16 shrink-0 items-center px-6">
+        <div className="flex h-16 shrink-0 items-center px-6 border-b border-sidebar-border/30">
           <Link href="/" className="flex items-center gap-2 font-bold text-lg tracking-tight hover:opacity-80 transition-opacity">
-            <span>🇮🇳</span> Smart Bharat AI
+            <IndiaFlagIcon className="w-7 h-5" /> Smart Bharat AI
           </Link>
         </div>
         <div className="flex-1 overflow-auto py-4">
@@ -99,7 +99,7 @@ export function Shell({ children }: ShellProps) {
       <div className="flex flex-1 flex-col overflow-hidden">
         <header className="flex h-16 shrink-0 items-center justify-between border-b px-4 md:hidden bg-background">
           <div className="flex items-center gap-2">
-            <span className="text-xl">🇮🇳</span>
+            <IndiaFlagIcon className="w-7 h-5" />
             <span className="font-bold">Smart Bharat</span>
           </div>
           <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -144,8 +144,12 @@ export function Shell({ children }: ShellProps) {
         )}
 
         {/* Main Content */}
-        <main className="flex-1 overflow-auto bg-muted/20">
-          <div className="container mx-auto p-4 md:p-6 lg:p-8 max-w-6xl">
+        <main className="flex-1 overflow-auto bg-slate-50 dark:bg-slate-950/40 relative">
+          {/* Ambient grid background */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800b_1px,transparent_1px),linear-gradient(to_bottom,#8080800b_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+          <div className="absolute top-0 right-0 w-[400px] h-[300px] bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-[450px] h-[350px] bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
+          <div className="container relative z-10 mx-auto p-4 md:p-6 lg:p-8 max-w-6xl">
             {children}
           </div>
         </main>

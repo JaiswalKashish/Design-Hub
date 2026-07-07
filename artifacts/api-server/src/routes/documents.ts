@@ -2,6 +2,20 @@ import { Router } from "express";
 import { getDocumentAssistance } from "../lib/gemini";
 import { GetDocumentInfoBody } from "@workspace/api-zod";
 
+// Mapping of document types to official government portals
+const OFFICIAL_PORTALS: Record<string, string | null> = {
+  "Passport": "https://www.passportindia.gov.in/",
+  "Aadhaar": "https://uidai.gov.in/",
+  "PAN Card": "https://www.onlineservices.nsdl.com/",
+  "Driving License": "https://parivahan.gov.in/",
+  "Voter ID": "https://voters.eci.gov.in/",
+  "Birth Certificate": null, // varies by state
+  "Income Certificate": null, // varies by state
+  "Ration Card": null, // varies by state
+  "PM Kisan": "https://pmkisan.gov.in/",
+  "Ayushman Bharat": "https://beneficiary.nha.gov.in/",
+};
+
 const router = Router();
 
 // POST /api/documents/info
@@ -41,6 +55,7 @@ router.post("/info", async (req, res) => {
       processingTime: info.processingTime || "Varies",
       offlineOffice: info.offlineOffice || "District Office",
       onlinePortal: info.onlinePortal || "https://www.india.gov.in",
+      official_portal: OFFICIAL_PORTALS[documentType] || "",
       importantNotes: info.importantNotes || [],
     });
   } catch (err) {

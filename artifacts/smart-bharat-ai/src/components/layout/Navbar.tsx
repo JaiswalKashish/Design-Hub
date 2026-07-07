@@ -3,6 +3,8 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 
+import { IndiaFlagIcon } from "@/components/ui/IndiaFlagIcon";
+
 export function Navbar() {
   const { user, logout } = useAuth();
   const [location] = useLocation();
@@ -13,7 +15,7 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center px-4 md:px-6">
         <Link href="/" className="mr-6 flex items-center space-x-2">
-          <span className="text-2xl">🇮🇳</span>
+          <IndiaFlagIcon className="w-8 h-6" />
           <span className="hidden font-bold sm:inline-block">
             Smart Bharat AI
           </span>
