@@ -19,11 +19,11 @@ An AI-powered civic platform that simplifies access to Indian Government service
 
 # 🌐 Live Demo
 
-🚀 **Live Website:**
-👉 **YOUR_VERCEL_DEPLOYMENT_LINK**
+🚀 **Live Website:*
+https://design-hub-smart-bharat-ai.vercel.app/
 
 📂 **GitHub Repository:**
-👉 **YOUR_GITHUB_REPOSITORY_LINK**
+https://github.com/JaiswalKashish/Design-Hub/tree/main
 
 ---
 
